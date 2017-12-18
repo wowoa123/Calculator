@@ -20,7 +20,7 @@ public:
                uint8_t, uint8_t, uint8_t, char[4][4], byte[], byte[], byte, byte);
     LiquidCrystal *returnLcd();
     Keypad *returnKeypad();
-    double setResult(double i);
+    int enter();
     void reset();
     double mplus(int a, int b);
     double msub(int a, int b);

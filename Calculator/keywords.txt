@@ -25,7 +25,6 @@ notOp	KEYWORD2
 num_begin	KEYWORD2
 num_end		KEYWORD2
 charToNum	KEYWORD2
-setResult	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

@@ -24,12 +24,6 @@ Keypad *Calculator::returnKeypad()
     return &mcustomKeypad;
 }
 
-double Calculator::setResult(double i)
-{
-    result = i;
-    return result;
-}
-
 void Calculator::reset()
 {
     for (int i = 0; i != max; ++i)
@@ -155,7 +149,7 @@ double Calculator::calculator()
             i += 1;
     }
 
-    result += data[0];
+    result = data[0];
     return result;
 }
 
