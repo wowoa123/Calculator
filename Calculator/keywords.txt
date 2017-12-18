@@ -1,0 +1,32 @@
+#######################################
+# Syntax Coloring Map For Calculator#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Calculator	KEYWORD1	LiquidCrystal
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+enter	KEYWORD2
+returnLcd	KEYWORD2
+returnKeypad	KEYWORD2
+reset	KEYWORD2
+mplus	KEYWORD2
+msub	KEYWORD2
+mmult	KEYWORD2
+mdiv	KEYWORD2
+data_init	KEYWORD2
+calculator	KEYWORD2
+notOp	KEYWORD2
+num_begin	KEYWORD2
+num_end		KEYWORD2
+charToNum	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
