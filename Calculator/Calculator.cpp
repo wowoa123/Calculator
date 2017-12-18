@@ -118,6 +118,11 @@ void Calculator::data_init(char ch[], int ch_size)
         if (!notOp(ch[i]))
             sign[sign_size++] = ch[i];
     }
+
+    for (int i = 0; i != num_size; ++i)
+    {
+        Serial.println(data[i]);
+    }
 }
 
 double Calculator::calculator()
@@ -219,16 +224,46 @@ bool notOp(char ch)
 double charToNum(char ch[], int begin, int end)
 {
     double tmp[end - begin] = {0};
+    int dot = 0;
+    bool no_dot = true;
     for (int i = 0, j = begin; i != (end - begin); ++i, ++j)
     {
-        tmp[i] = ch[j] - '0';
+        if (ch[j] == '.')
+        {
+            tmp[i] = 0;
+            dot = i;
+            no_dot = false;
+        }
+        else
+            tmp[i] = ch[j] - '0';
     }
 
-    for (int i = 0; i != (end - begin); ++i)
+    if (no_dot)
     {
-        for (int j = 0; j != ((end - begin) - i - 1); ++j)
+        for (int i = 0; i != (end - begin); ++i)
         {
-            tmp[i] *= 10;
+            for (int j = 0; j != ((end - begin) - i - 1); ++j)
+            {
+                tmp[i] *= 10;
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; i != dot; ++i)
+        {
+            for (int j = 0; j != (dot - i - 1); ++j)
+            {
+                tmp[i] *= 10;
+            }
+        }
+
+        for (int i = dot + 1; i != (end - begin); ++i)
+        {
+            for (int j = dot; j != i; ++j)
+            {
+                tmp[i] /= 10;
+            }
         }
     }
 
