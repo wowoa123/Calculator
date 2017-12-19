@@ -313,3 +313,41 @@ double charToNum(char ch[], int begin, int end)
 
     return r;
 }
+
+bool have_error(char ch[], int ch_size)
+{
+    //保证第一位不是乘或除或小数点，保证最后一位不是运算符或小数点
+    if ((ch[0] == '*') || (ch[0] == '/') || (ch[0] == '.') ||
+        (!notOp(ch[ch_size - 1])) || (ch[ch_size - 1] == '.'))
+        return true;
+
+    //防止除0
+    for (int i = 0; i != ch_size; ++i)
+    {
+        if (ch[i] == '/')
+            if (ch[i + 1] == '0')
+                return true;
+    }
+
+    //确认小数点前是不是运算符,小数点后是不是运算符或小数点
+    for (int i = 0; i != ch_size; ++i)
+    {
+        if (ch[i] == '.')
+        {
+            if ((!notOp(ch[i - 1])) || (ch[i + 1] == '.') || (!notOp(ch[i + 1])))
+                return true;
+        }
+    }
+
+    //确认运算符后是不是运算符
+    for (int i = 0; i != ch_size; ++i)
+    {
+        if (!notOp(ch[i]))
+        {
+            if ((!notOp(ch[i + 1])))
+                return true;
+        }
+    }
+
+    return false;
+}

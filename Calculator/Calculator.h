@@ -3,7 +3,6 @@
 
 #include <Keypad.h>
 #include <LiquidCrystal.h>
-#include <MsTimer2.h>
 
 class Calculator {
 private:
@@ -41,5 +40,6 @@ int num_begin(char ch[], int begin, int end);
 int num_end(char ch[], int begin, int end);
 double charToNum(char ch[], int begin, int end);
 int enter(Calculator &calu, LiquidCrystal *lcd, Keypad *customKeypad, char ch[], int ch_size);
+bool have_error(char ch[], int ch_size);
 
 #endif // CALCULATOR_H

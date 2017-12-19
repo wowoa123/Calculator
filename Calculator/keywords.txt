@@ -30,6 +30,7 @@ setResult	KEYWORD2
 setModel	KEYWORD2
 returnModel	KEYWORD2
 returnSign	KEYWORD2
+have_error	KEYWORD2
 #######################################
 # Constants (LITERAL1)
 #######################################
