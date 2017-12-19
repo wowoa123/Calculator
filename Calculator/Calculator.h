@@ -15,12 +15,18 @@ private:
     LiquidCrystal mlcd;
     Keypad mcustomKeypad;
     double result;
+    bool addModel;
+    char addSign;
 public:
     Calculator(uint8_t, uint8_t, uint8_t, uint8_t,
                uint8_t, uint8_t, uint8_t, char[4][4], byte[], byte[], byte, byte);
     LiquidCrystal *returnLcd();
     Keypad *returnKeypad();
-    int enter();
+    bool returnModel();
+    char returnSign();
+    bool setModel(bool b);
+    char saveSign(char ch);
+    double setResult(double n);
     void reset();
     double mplus(int a, int b);
     double msub(int a, int b);
@@ -34,6 +40,6 @@ bool notOp(char ch);
 int num_begin(char ch[], int begin, int end);
 int num_end(char ch[], int begin, int end);
 double charToNum(char ch[], int begin, int end);
-int enter(LiquidCrystal *lcd, Keypad *customKeypad, char ch[], int ch_size);
+int enter(Calculator &calu, LiquidCrystal *lcd, Keypad *customKeypad, char ch[], int ch_size);
 
 #endif // CALCULATOR_H

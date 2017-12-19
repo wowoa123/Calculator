@@ -24,6 +24,34 @@ Keypad *Calculator::returnKeypad()
     return &mcustomKeypad;
 }
 
+bool Calculator::returnModel()
+{
+    return addModel;
+}
+
+char Calculator::returnSign()
+{
+    return addSign;
+}
+
+bool Calculator::setModel(bool b)
+{
+    addModel = b;
+    return addModel;
+}
+
+char Calculator::saveSign(char ch)
+{
+    addSign = ch;
+    return addSign;
+}
+
+double Calculator::setResult(double n)
+{
+    result = n;
+    return result;
+}
+
 void Calculator::reset()
 {
     for (int i = 0; i != max; ++i)
@@ -98,6 +126,11 @@ double Calculator::mdiv(int a, int b)
 
 void Calculator::data_init(char ch[], int ch_size)
 {
+    if (addModel)
+    {
+        data[num_size++] = result;
+    }
+
     int begin = 0;
     int end = ch_size;
 
@@ -117,11 +150,6 @@ void Calculator::data_init(char ch[], int ch_size)
     {
         if (!notOp(ch[i]))
             sign[sign_size++] = ch[i];
-    }
-
-    for (int i = 0; i != num_size; ++i)
-    {
-        Serial.println(data[i]);
     }
 }
 
@@ -153,10 +181,20 @@ double Calculator::calculator()
     return result;
 }
 
-int enter(LiquidCrystal *lcd, Keypad *customKeypad, char ch[], int ch_size)
+int enter(Calculator &calu, LiquidCrystal *lcd, Keypad *customKeypad, char ch[], int ch_size)
 {
     int i = 0;
     //确认是否按下等号
+
+    if (calu.returnModel())
+    {
+        i = 4;
+        ch[0] = 'A';
+        ch[1] = 'n';
+        ch[2] = 's';
+        ch[3] = calu.returnSign();
+    }
+
     bool flag = false;
     while (!flag)
     {
@@ -192,7 +230,7 @@ int num_begin(char ch[], int begin, int end)
 {
     for (int i = begin; i != end; ++i)
     {
-        if (notOp(ch[i]))
+        if (notOp(ch[i]) && ch[i] != 'A' && ch[i] != 'n' && ch[i] != 's')
             return i;
     }
     return end;

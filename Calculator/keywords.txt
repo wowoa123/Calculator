@@ -5,7 +5,7 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-Calculator	KEYWORD1	LiquidCrystal
+Calculator	KEYWORD1	Calculator
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -25,7 +25,11 @@ notOp	KEYWORD2
 num_begin	KEYWORD2
 num_end		KEYWORD2
 charToNum	KEYWORD2
-
+saveSign	KEYWORD2
+setResult	KEYWORD2
+setModel	KEYWORD2
+returnModel	KEYWORD2
+returnSign	KEYWORD2
 #######################################
 # Constants (LITERAL1)
 #######################################
