@@ -1,7 +1,6 @@
 #include <Calculator.h>
 #include <Keypad.h>
 #include <LiquidCrystal.h>
-#include <MsTimer2.h>
 
 const int max_size = 16;
 const byte rows = 4;
