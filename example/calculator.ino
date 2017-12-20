@@ -32,6 +32,8 @@ void loop() {
     lcd->clear();
     lcd->setCursor(0, 0);
     lcd->print("ENTER ERROR!");
+    calu.reset();
+    calu.setModel(false);
     char tmp = 0;
     bool b = false;
     while (!b)

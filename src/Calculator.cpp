@@ -146,10 +146,23 @@ void Calculator::data_init(char ch[], int ch_size)
         }
     }
 
-    for (int i = 0; i != ch_size; ++i)
+    if ((ch[0] == '+') || (ch[0] == '-'))
     {
-        if (!notOp(ch[i]))
-            sign[sign_size++] = ch[i];
+        if (ch[0] == '-')
+            data[0] = -data[0];
+        for (int i = 1; i != ch_size; ++i)
+        {
+            if (!notOp(ch[i]))
+                sign[sign_size++] = ch[i];
+        }
+    }
+    else
+    {
+        for (int i = 0; i != ch_size; ++i)
+        {
+            if (!notOp(ch[i]))
+                sign[sign_size++] = ch[i];
+        }
     }
 }
 
@@ -180,6 +193,13 @@ double Calculator::calculator()
     result = data[0];
     return result;
 }
+
+
+
+
+
+
+
 
 int enter(Calculator &calu, LiquidCrystal *lcd, Keypad *customKeypad, char ch[], int ch_size)
 {
