@@ -7,27 +7,38 @@
 如果使用的不是4*4按键需要修改头文件中的构造函数。
 
 非类成员函数:
+
 int enter(Calculator &calu, LiquidCrystal *lcd, Keypad *customKeypad, char ch[], int ch_size)
 参数为calculator对象，其内的lcd和keypad对象，一个保存输入的数组和最大输入的大小，返回实际输入大小。
+
 bool notOp(char ch)
 判断是不是运算符。
+
 bool have_error(char ch[], int ch_size)
 检查输入是否有错。
 
 类成员函数:
+
 LiquidCrystal *returnLcd()   Keypad *returnKeypad()
 返回指向calculator对象内的lcd和keypad对象的指针。
+
 bool returnModel()
 查看是不是处于累计运算模式。
+
 bool setModel(bool b)
 修改模式。
+
 char saveSign(char ch)
 保存输出Ans后的第一个运算符。
+
 double setResult(double n)
 修改对象内的结果。
+
 void reset()
 重置对象内除模式和saveSign保存的符号外的所有数据。
+
 void data_init(char ch[], int ch_size)
 初始化内置数据数组和运算符数组。
+
 double calculator()
 计算结果。
