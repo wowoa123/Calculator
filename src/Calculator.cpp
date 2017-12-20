@@ -1,5 +1,6 @@
 #include "Calculator.h"
 
+//类方法
 Calculator::Calculator(uint8_t rs, uint8_t rw, uint8_t enable,
                        uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
                        char keys[4][4], byte row[], byte col[],
@@ -69,6 +70,7 @@ double Calculator::mplus(int a, int b)
     for (int i = b; i != num_size; ++i)
         data[i] = data[i + 1];
     num_size -= 1;
+
     //去掉对应符号
     for (int i = a; i != sign_size; ++i)
         sign[i] = sign[i + 1];
@@ -85,6 +87,7 @@ double Calculator::msub(int a, int b)
     for (int i = b; i != num_size; ++i)
         data[i] = data[i + 1];
     num_size -= 1;
+
     //去掉对应符号
     for (int i = a; i != sign_size; ++i)
         sign[i] = sign[i + 1];
@@ -101,6 +104,7 @@ double Calculator::mmult(int a, int b)
     for (int i = b; i != num_size; ++i)
         data[i] = data[i + 1];
     num_size -= 1;
+
     //去掉对应符号
     for (int i = a; i != sign_size; ++i)
         sign[i] = sign[i + 1];
@@ -117,6 +121,7 @@ double Calculator::mdiv(int a, int b)
     for (int i = b; i != num_size; ++i)
         data[i] = data[i + 1];
     num_size -= 1;
+
     //去掉对应符号
     for (int i = a; i != sign_size; ++i)
         sign[i] = sign[i + 1];
@@ -136,18 +141,22 @@ void Calculator::data_init(char ch[], int ch_size)
 
     while (begin != end)
     {
+        //数字开头
         begin = num_begin(ch, begin, end);
 
         if (begin != end)
         {
+            //数字结尾
             int after = num_end(ch, begin, end);
             data[num_size++] = charToNum(ch, begin, after);
             begin = after;
         }
     }
 
+    //如果开头是正号或负号，忽略该符号
     if ((ch[0] == '+') || (ch[0] == '-'))
     {
+        //负号将第一个数字取负
         if (ch[0] == '-')
             data[0] = -data[0];
         for (int i = 1; i != ch_size; ++i)
@@ -168,6 +177,7 @@ void Calculator::data_init(char ch[], int ch_size)
 
 double Calculator::calculator()
 {
+    //乘法除法优先
     int i = 0;
     while (i != sign_size)
     {
@@ -179,6 +189,7 @@ double Calculator::calculator()
             i += 1;
     }
 
+    //运算加法减法
     i = 0;
     while (i != sign_size)
     {
@@ -200,12 +211,12 @@ double Calculator::calculator()
 
 
 
-
+//非类方法
 int enter(Calculator &calu, LiquidCrystal *lcd, Keypad *customKeypad, char ch[], int ch_size)
 {
     int i = 0;
-    //确认是否按下等号
 
+    //累计运算下设置数组起始为Ans和输入的运算符
     if (calu.returnModel())
     {
         i = 4;
@@ -215,6 +226,7 @@ int enter(Calculator &calu, LiquidCrystal *lcd, Keypad *customKeypad, char ch[],
         ch[3] = calu.returnSign();
     }
 
+    //检查是否有输入
     bool flag = false;
     while (!flag)
     {
@@ -231,6 +243,7 @@ int enter(Calculator &calu, LiquidCrystal *lcd, Keypad *customKeypad, char ch[],
             flag = true;
             break;
          default:
+            //打印并保存输入
             if (i != ch_size)
             {
                 ch[i++] = key;
@@ -243,6 +256,7 @@ int enter(Calculator &calu, LiquidCrystal *lcd, Keypad *customKeypad, char ch[],
         }
     }
 
+    //返回实际输入大小
     return i;
 }
 
@@ -286,6 +300,7 @@ double charToNum(char ch[], int begin, int end)
     bool no_dot = true;
     for (int i = 0, j = begin; i != (end - begin); ++i, ++j)
     {
+        //把小数点对应数组位置设为0并记录该位置
         if (ch[j] == '.')
         {
             tmp[i] = 0;
@@ -293,7 +308,7 @@ double charToNum(char ch[], int begin, int end)
             no_dot = false;
         }
         else
-            tmp[i] = ch[j] - '0';
+            tmp[i] = ch[j] - '0';   //'1' - '0' = 1
     }
 
     if (no_dot)
@@ -316,6 +331,7 @@ double charToNum(char ch[], int begin, int end)
             }
         }
 
+        //小数点后的计算
         for (int i = dot + 1; i != (end - begin); ++i)
         {
             for (int j = dot; j != i; ++j)

@@ -52,7 +52,11 @@ void loop() {
     calu.data_init(in, in_size);
     lcd->setCursor(0, 1);
     double r = calu.calculator();
-    lcd->print(r);
+    //如果为整数输出整数
+    if (r - (int)r != 0)
+      lcd->print(r);
+    else
+      lcd->print((int)r);
     char key = 0;
     bool flag = false;
     while (!flag)
